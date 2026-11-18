@@ -1,19 +1,18 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import {
   CheckCircle2,
+  ClipboardList,
   ExternalLink,
   Info,
   Loader2,
-  LogIn,
   MessageCircle,
   Search,
   ShieldCheck,
   ShoppingBag,
-  UserPlus,
   X,
 } from 'lucide-react';
 import { AdminDashboard } from './components/AdminDashboard';
-import { AuthModal } from './components/AuthModal';
+import { AuthScreen } from './components/AuthScreen';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { Navbar } from './components/Navbar';
@@ -62,11 +61,6 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [directCheckoutItem, setDirectCheckoutItem] = useState<CartItem | null>(null);
   const [userPortalOpen, setUserPortalOpen] = useState(false);
-
-  const [authModalState, setAuthModalState] = useState<{
-    open: boolean;
-    mode: 'login' | 'register';
-  }>({ open: false, mode: 'login' });
 
   // Contact form
   const [contactName, setContactName] = useState('');
@@ -125,6 +119,7 @@ export default function App() {
         lastLoginAt: Date.now(),
       };
       setUserProfile(fallbackProfile);
+      setAdminViewOpen(isAdminEmail(firebaseUser.email));
       setAuthReady(true);
 
       if (!cached) {
@@ -218,13 +213,8 @@ export default function App() {
     setCart((prev) => prev.filter((item) => item.productId !== productId));
   };
 
-  const handleOpenAuth = (mode: 'login' | 'register' = 'login') => {
-    setAuthModalState({ open: true, mode });
-  };
-
   const handleAuthSuccess = (profile: UserProfile, isNewRegistration?: boolean) => {
     setUserProfile(profile);
-    setAuthModalState((prev) => ({ ...prev, open: false }));
 
     if (isAdminEmail(profile.email)) {
       setAdminViewOpen(true);
@@ -235,6 +225,7 @@ export default function App() {
           : 'Selamat datang kembali di Dashboard Admin Sweet Scoop.'
       );
     } else {
+      setAdminViewOpen(false);
       notify(
         'success',
         isNewRegistration
@@ -249,6 +240,8 @@ export default function App() {
       await logoutUser();
       setAdminViewOpen(false);
       setUserPortalOpen(false);
+      setCartOpen(false);
+      setCheckoutOpen(false);
       notify('info', 'Anda telah keluar dari akun.');
     } catch (err) {
       notify('error', formatFirebaseError(err));
@@ -281,7 +274,25 @@ export default function App() {
     }
   };
 
-  if (adminViewOpen && isAdmin && userProfile) {
+  if (!authReady) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f4f9ff] text-[#173b67] gap-3">
+        <Loader2 className="w-7 h-7 animate-spin text-[#2563eb]" />
+        <p className="text-xs font-semibold text-[#58718e]">Memuat Sweet Scoop...</p>
+      </div>
+    );
+  }
+
+  if (!userProfile) {
+    return (
+      <>
+        <AuthScreen onSuccess={handleAuthSuccess} />
+        <ToastStack toasts={toasts} onDismiss={(id) => setToasts((p) => p.filter((t) => t.id !== id))} />
+      </>
+    );
+  }
+
+  if (adminViewOpen && isAdmin) {
     return (
       <>
         <AdminDashboard
@@ -303,7 +314,7 @@ export default function App() {
         user={userProfile}
         isAdmin={isAdmin}
         onOpenCart={() => setCartOpen(true)}
-        onOpenAuth={handleOpenAuth}
+        onOpenAuth={() => {}}
         onOpenUserPortal={() => setUserPortalOpen(true)}
         onOpenAdminDashboard={() => setAdminViewOpen(true)}
         onLogout={handleLogout}
@@ -337,16 +348,7 @@ export default function App() {
               <span>Jelajahi Katalog</span>
             </a>
 
-            {!userProfile ? (
-              <button
-                type="button"
-                onClick={() => handleOpenAuth('register')}
-                className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#f0f7ff] border border-[#cfe2f7] text-[#173b67] text-sm font-bold transition-colors flex items-center gap-2 whitespace-nowrap"
-              >
-                <UserPlus className="w-4 h-4 text-[#2563eb]" />
-                <span>Masuk / Daftar Akun</span>
-              </button>
-            ) : isAdmin ? (
+            {isAdmin ? (
               <button
                 type="button"
                 onClick={() => setAdminViewOpen(true)}
@@ -361,7 +363,7 @@ export default function App() {
                 onClick={() => setUserPortalOpen(true)}
                 className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#f0f7ff] border border-[#cfe2f7] text-[#173b67] text-sm font-bold transition-colors flex items-center gap-2 whitespace-nowrap"
               >
-                <LogIn className="w-4 h-4 text-[#2563eb]" />
+                <ClipboardList className="w-4 h-4 text-[#2563eb]" />
                 <span>Pesanan Saya</span>
               </button>
             )}
@@ -371,18 +373,6 @@ export default function App() {
             <span>WhatsApp Resmi: {WHATSAPP_NUMBER}</span>
             <span aria-hidden="true">·</span>
             <span>Update Katalog &amp; Pesanan Real-Time</span>
-            {authReady && !userProfile && (
-              <>
-                <span aria-hidden="true">·</span>
-                <button
-                  type="button"
-                  onClick={() => handleOpenAuth('login')}
-                  className="font-semibold text-[#2563eb] hover:underline"
-                >
-                  Masuk Akun
-                </button>
-              </>
-            )}
           </div>
         </div>
 
@@ -663,32 +653,23 @@ export default function App() {
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => handleOpenAuth('register')}
-              className="hover:text-white underline"
+              onClick={() => (isAdmin ? setAdminViewOpen(true) : setUserPortalOpen(true))}
+              className="text-blue-200 hover:text-white underline font-semibold"
             >
-              Daftar Akun
+              {isAdmin ? 'Dashboard Admin' : 'Pesanan Saya'}
             </button>
             <button
               type="button"
-              onClick={() =>
-                isAdmin ? setAdminViewOpen(true) : handleOpenAuth('login')
-              }
-              className="text-blue-200 hover:text-white underline font-semibold"
+              onClick={handleLogout}
+              className="hover:text-white underline"
             >
-              {isAdmin ? 'Dashboard Admin' : 'Masuk Akun'}
+              Keluar Akun
             </button>
           </div>
         </div>
       </footer>
 
       {/* Modals & Drawers */}
-      <AuthModal
-        open={authModalState.open}
-        initialMode={authModalState.mode}
-        onClose={() => setAuthModalState((prev) => ({ ...prev, open: false }))}
-        onSuccess={handleAuthSuccess}
-      />
-
       <CartDrawer
         open={cartOpen}
         items={cart}
@@ -717,7 +698,7 @@ export default function App() {
             setCart([]);
           }
         }}
-        onOpenAuth={() => handleOpenAuth('login')}
+        onOpenAuth={() => {}}
       />
 
       <UserPortalModal
