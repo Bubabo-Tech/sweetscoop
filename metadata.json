@@ -1,0 +1,6 @@
+{
+  "name": "Sweet Scoop - Official Store & Admin Portal",
+  "description": "Toko es krim dan gelato Sweet Scoop dengan sistem login user & admin, pendaftaran akun, keranjang belanja, dan manajemen pesanan real-time menggunakan Firebase Authentication & Realtime Database.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

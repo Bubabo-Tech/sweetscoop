@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Scoop - Official Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563EB;
+      --secondary: #FFFFFF;
+      --background: #EFF7FF;
+      --text: #1E3A5F;
+      --button: #2563EB;
+      --accent: #2563EB;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+    }
+    .custom-radius { border-radius: var(--radius); }
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Sweet Scoop: fresh, soft-blue gelato theme */
+    body {
+      background: linear-gradient(135deg, #f4f9ff 0%, #e5f2ff 48%, #f8fbff 100%);
+      color: #1e3a5f;
+    }
+    .glass-nav {
+      background: rgba(20, 52, 91, 0.94);
+      box-shadow: 0 8px 30px rgba(30, 64, 110, 0.12);
+    }
+    #home { position: relative; }
+    #heroHeadline { color: #173b67 !important; }
+    #heroSubheadline { color: #58718e !important; }
+    #produk {
+      background: linear-gradient(180deg, rgba(219, 237, 255, .78), rgba(239, 247, 255, .96)) !important;
+      border-color: #d4e6f8 !important;
+    }
+    #produk h2, #tentang-kami h2, #kontak h2 { color: #173b67 !important; }
+    #produk .text-slate-400, #tentang-kami .text-slate-300,
+    #kontak .text-slate-400 { color: #607894 !important; }
+    #mainProductsGrid > div {
+      background: #ffffff !important;
+      border: 1px solid #dceafa !important;
+      box-shadow: 0 12px 32px rgba(39, 91, 145, .10) !important;
+    }
+    #mainProductsGrid > div:hover {
+      border-color: #8fc5ff !important;
+      box-shadow: 0 18px 38px rgba(39, 91, 145, .16) !important;
+    }
+    #mainProductsGrid h3 { color: #173b67 !important; }
+    #mainProductsGrid p { color: #6b8098 !important; }
+    #mainProductsGrid .border-t { border-color: #e4eef8 !important; }
+    #mainProductsGrid button:last-child {
+      color: #49627d !important;
+      background: #f0f7ff !important;
+      border-color: #dceafa !important;
+    }
+    #tentang-kami {
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(211, 230, 249, .9);
+      border-radius: 28px;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      padding: 4rem 1.5rem;
+      box-shadow: 0 12px 32px rgba(39, 91, 145, .06);
+    }
+    #kontak {
+      background: linear-gradient(135deg, #d9ecff, #edf6ff) !important;
+      border-color: #d2e5f8 !important;
+    }
+    #kontak form {
+      background: #ffffff !important;
+      border: 1px solid #d8e8f8 !important;
+      box-shadow: 0 16px 40px rgba(39, 91, 145, .10) !important;
+    }
+    #kontak label { color: #385675 !important; }
+    #kontak input, #kontak textarea {
+      background: #f5f9ff !important;
+      color: #173b67 !important;
+      border-color: #d6e5f5 !important;
+    }
+    #kontak input::placeholder, #kontak textarea::placeholder { color: #8aa0b8; }
+    footer { background: #15385f !important; }
+    .custom-radius { border-radius: 18px; }
+    @media (max-width: 640px) {
+      #tentang-kami { margin-left: 1rem; margin-right: 1rem; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-10 h-10 custom-radius flex items-center justify-center font-black text-white text-lg shadow-lg" style="background-color: var(--primary);">
+          S
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white">Sweet Scoop</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#produk" class="hover:text-blue-400 transition text-slate-300 hover:text-white">Katalog</a><a href="#produk" class="hover:text-blue-400 transition text-slate-300 hover:text-white">Promo Spesial</a><a href="#tentang-kami" class="hover:text-blue-400 transition text-slate-300 hover:text-white">Tentang Kami</a><a href="#kontak" class="hover:text-blue-400 transition text-slate-300 hover:text-white">Cara Order</a><a href="#kontak" class="hover:text-blue-400 transition text-slate-300 hover:text-white">Kontak</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <!-- Cart Button -->
+        <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+        </button>
+
+        <a href="https://wa.me/6281347479530?text=Halo%20Sweet%20Scoop,%20saya%20ingin%20bertanya%20seputar%20produk." target="_blank" class="px-5 py-2.5 custom-radius font-semibold text-xs text-white shadow-lg transition transform hover:scale-105 flex items-center gap-1.5" style="background-color: #25D366;">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>Chat Toko</span>
+        </a>
+      </div>
+
+      <!-- Mobile Button -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button onclick="toggleCart()" class="relative p-2 rounded-xl bg-white/10 text-white">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="mobileCartCount" class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+        <button id="mobileMenuBtn" class="p-2 text-white">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileDrawer" class="hidden md:hidden px-6 py-4 bg-slate-900 border-b border-white/10 space-y-3">
+      <a href="#produk" class="block text-sm py-2 text-slate-300 font-medium">Katalog</a><a href="#produk" class="block text-sm py-2 text-slate-300 font-medium">Promo Spesial</a><a href="#tentang-kami" class="block text-sm py-2 text-slate-300 font-medium">Tentang Kami</a><a href="#kontak" class="block text-sm py-2 text-slate-300 font-medium">Cara Order</a><a href="#kontak" class="block text-sm py-2 text-slate-300 font-medium">Kontak</a>
+      <div class="pt-2">
+        <a href="https://wa.me/6281347479530" target="_blank" class="block w-full py-3 text-center custom-radius font-bold text-xs text-white flex items-center justify-center gap-2 bg-emerald-600">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Chat WhatsApp (6281347479530)</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-36 pb-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center flex-1">
+    <div class="space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 custom-radius text-xs font-semibold" style="background-color: rgba(99, 102, 241, 0.2); color: var(--accent);">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Es Krim & Gelato • Segarnya Bikin Bahagia</span>
+      </div>
+
+      <h1 id="heroHeadline" class="text-4xl md:text-6xl font-black leading-tight tracking-tight text-white">
+        CEMILAN YANG MENYEGARKAN 
+      </h1>
+
+      <p id="heroSubheadline" class="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl">
+        Sweet Scoop, satu gigitan membawa kebahagiaan!
+      </p>
+
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a href="#produk" class="px-8 py-4 custom-radius font-bold text-sm text-white shadow-xl transition transform hover:scale-105" style="background-color: var(--button);">
+          <i class="fa-solid fa-shopping-bag mr-2"></i>Belanja via WhatsApp
+        </a>
+        <a href="https://wa.me/6281347479530?text=Halo%20Sweet%20Scoop,%20saya%20ingin%20tanya%20katalog." target="_blank" class="px-7 py-4 custom-radius font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span>WhatsApp Toko</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Store Visual Banner -->
+    <div class="relative custom-radius overflow-hidden shadow-2xl border border-white/15 aspect-[4/3] bg-slate-900">
+      <img id="heroBannerImg" src="https://i.imgur.com/GggFmy1.png" alt="Sweet Scoop" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6">
+        <h3 class="text-2xl font-bold text-white mb-1">Sweet Scoop</h3>
+        <p class="text-xs text-slate-300 mb-2">Sweet Scoop merupakan toko yang menyediakan berbagai pilihan es krim dan gelato dengan rasa yang lezat, tekstur lembut, serta tampilan yang menarik. Kami menghadirkan berbagai varian rasa, mulai dari cokelat, vanila, stroberi, hingga matcha yang dapat dinikmati oleh berbagai kalangan.</p>
+        <span class="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
+          <i class="fa-solid fa-shield-halved"></i> Toko Resmi & Terverifikasi
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="produk" class="py-20 px-6 border-t border-white/10" style="background-color: rgba(30, 41, 59, 0.4);">
+    <div class="max-w-7xl mx-auto space-y-12">
+      <div class="text-center space-y-3">
+        <div class="inline-block px-3 py-1 custom-radius text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          Katalog Produk Siap Kirim
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-white">Produk Terlaris Minggu Ini</h2>
+        <p class="text-slate-400 text-sm max-w-lg mx-auto">Klik 'Beli via WhatsApp' untuk langsung chat dan memesan ke nomor toko kami.</p>
+      </div>
+
+      <div id="mainProductsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="custom-radius border border-white/10 overflow-hidden transition-all hover:border-blue-400/50 hover:-translate-y-1 shadow-xl flex flex-col bg-white">
+          <div class="aspect-square w-full bg-slate-100 relative overflow-hidden group">
+            <img src="https://i.imgur.com/8aZF7qk.jpeg" alt="Strawberry Gelato" loading="lazy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute top-3 right-3 bg-slate-900/85 backdrop-blur px-2.5 py-1 rounded-full text-xs font-mono font-bold text-white">
+              Rp 30.000
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 mb-1.5">Strawberry Gelato</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Gelato dan es krim lezat dengan kualitas terbaik.</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <button onclick="buyViaWa('Strawberry Gelato', '30.000')" class="w-full py-3 custom-radius font-bold text-xs text-white shadow-lg transition flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500">
+                <i class="fa-brands fa-whatsapp text-sm"></i><span>Beli via WhatsApp</span>
+              </button>
+              <button onclick="addToCart('Strawberry Gelato', '30.000', 'https://i.imgur.com/8aZF7qk.jpeg')" class="w-full py-2 custom-radius font-semibold text-xs text-slate-600 hover:text-slate-900 bg-blue-50 hover:bg-blue-100 border border-blue-100 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-cart-plus"></i><span>+ Keranjang Belanja</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="custom-radius border border-white/10 overflow-hidden transition-all hover:border-blue-400/50 hover:-translate-y-1 shadow-xl flex flex-col bg-white">
+          <div class="aspect-square w-full bg-slate-100 relative overflow-hidden group">
+            <img src="https://i.imgur.com/2SmdYcr.jpeg" alt="BlueBerry Gelato" loading="lazy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute top-3 right-3 bg-slate-900/85 backdrop-blur px-2.5 py-1 rounded-full text-xs font-mono font-bold text-white">
+              Rp 30.000
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 mb-1.5">BlueBerry Gelato</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Gelato dan es krim lezat dengan kualitas terbaik.</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <button onclick="buyViaWa('BlueBerry Gelato', '30.000')" class="w-full py-3 custom-radius font-bold text-xs text-white shadow-lg transition flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500">
+                <i class="fa-brands fa-whatsapp text-sm"></i><span>Beli via WhatsApp</span>
+              </button>
+              <button onclick="addToCart('BlueBerry Gelato', '30.000', 'https://i.imgur.com/2SmdYcr.jpeg')" class="w-full py-2 custom-radius font-semibold text-xs text-slate-600 hover:text-slate-900 bg-blue-50 hover:bg-blue-100 border border-blue-100 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-cart-plus"></i><span>+ Keranjang Belanja</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="custom-radius border border-white/10 overflow-hidden transition-all hover:border-blue-400/50 hover:-translate-y-1 shadow-xl flex flex-col bg-white">
+          <div class="aspect-square w-full bg-slate-100 relative overflow-hidden group">
+            <img src="https://i.imgur.com/yIvgwTe.jpeg" alt="Matcha Gelato" loading="lazy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute top-3 right-3 bg-slate-900/85 backdrop-blur px-2.5 py-1 rounded-full text-xs font-mono font-bold text-white">
+              Rp 30.000
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 mb-1.5">Matcha Gelato</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Gelato dan es krim lezat dengan kualitas terbaik.</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <button onclick="buyViaWa('Matcha Gelato', '30.000')" class="w-full py-3 custom-radius font-bold text-xs text-white shadow-lg transition flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500">
+                <i class="fa-brands fa-whatsapp text-sm"></i><span>Beli via WhatsApp</span>
+              </button>
+              <button onclick="addToCart('Matcha Gelato', '30.000', 'https://i.imgur.com/yIvgwTe.jpeg')" class="w-full py-2 custom-radius font-semibold text-xs text-slate-600 hover:text-slate-900 bg-blue-50 hover:bg-blue-100 border border-blue-100 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-cart-plus"></i><span>+ Keranjang Belanja</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="custom-radius border border-white/10 overflow-hidden transition-all hover:border-blue-400/50 hover:-translate-y-1 shadow-xl flex flex-col bg-white">
+          <div class="aspect-square w-full bg-slate-100 relative overflow-hidden group">
+            <img src="https://i.imgur.com/L0Xj56l.jpeg" alt="Chocolate Ice Cream" loading="lazy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute top-3 right-3 bg-slate-900/85 backdrop-blur px-2.5 py-1 rounded-full text-xs font-mono font-bold text-white">
+              Rp 15.000
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 mb-1.5">Chocolate Ice Cream</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Gelato dan es krim lezat dengan kualitas terbaik.</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <button onclick="buyViaWa('Chocolate Ice Cream', '15.000')" class="w-full py-3 custom-radius font-bold text-xs text-white shadow-lg transition flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500">
+                <i class="fa-brands fa-whatsapp text-sm"></i><span>Beli via WhatsApp</span>
+              </button>
+              <button onclick="addToCart('Chocolate Ice Cream', '15.000', 'https://i.imgur.com/L0Xj56l.jpeg')" class="w-full py-2 custom-radius font-semibold text-xs text-slate-600 hover:text-slate-900 bg-blue-50 hover:bg-blue-100 border border-blue-100 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-cart-plus"></i><span>+ Keranjang Belanja</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="custom-radius border border-white/10 overflow-hidden transition-all hover:border-blue-400/50 hover:-translate-y-1 shadow-xl flex flex-col bg-white">
+          <div class="aspect-square w-full bg-slate-100 relative overflow-hidden group">
+            <img src="https://i.imgur.com/MhJnh9d.png" alt="Vanilla Ice Cream" loading="lazy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute top-3 right-3 bg-slate-900/85 backdrop-blur px-2.5 py-1 rounded-full text-xs font-mono font-bold text-white">
+              Rp 15.000
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 mb-1.5">Vanilla Ice Cream</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Gelato dan es krim lezat dengan kualitas terbaik.</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 space-y-2">
+              <button onclick="buyViaWa('Vanilla Ice Cream', '15.000')" class="w-full py-3 custom-radius font-bold text-xs text-white shadow-lg transition flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500">
+                <i class="fa-brands fa-whatsapp text-sm"></i><span>Beli via WhatsApp</span>
+              </button>
+              <button onclick="addToCart('Vanilla Ice Cream', '15.000', 'https://i.imgur.com/MhJnh9d.png')" class="w-full py-2 custom-radius font-semibold text-xs text-slate-600 hover:text-slate-900 bg-blue-50 hover:bg-blue-100 border border-blue-100 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-cart-plus"></i><span>+ Keranjang Belanja</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="tentang-kami" class="py-20 px-6 max-w-5xl mx-auto text-center space-y-6">
+    <div class="inline-block px-3 py-1 custom-radius text-xs font-semibold" style="background-color: rgba(99, 102, 241, 0.15); color: var(--accent);">
+      Tentang Kami
+    </div>
+    <h2 class="text-3xl font-black text-white">Komitmen Kami Terhadap Pelanggan</h2>
+    <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+      Toko Sweet Scoop mengusung konsep modern, ceria, dan nyaman dengan warna dominan biru yang memberikan kesan segar dan menenangkan. Kami mengutamakan kualitas bahan, kebersihan, serta pelayanan yang ramah kepada setiap pelanggan.
+    </p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="kontak" class="py-20 px-6 border-t border-white/10" style="background-color: rgba(15, 23, 42, 0.8);">
+    <div class="max-w-2xl mx-auto space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl font-bold text-white">Hubungi Kami</h2>
+        <p class="text-slate-400 text-xs">Punya pertanyaan seputar produk atau pesanan? Hubungi nomor WhatsApp kami di <strong class="text-emerald-400 font-mono">6281347479530</strong> atau kirim pesan di bawah.</p>
+      </div>
+
+      <form id="contactForm" class="p-8 custom-radius border border-white/15 space-y-4 shadow-2xl" style="background-color: var(--secondary);">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Nama Lengkap</label>
+          <input type="text" required placeholder="Nama Anda" class="w-full bg-slate-900 border border-slate-700 custom-radius py-3 px-4 text-xs text-white outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Nomor WhatsApp / HP</label>
+          <input type="text" required placeholder="0812..." class="w-full bg-slate-900 border border-slate-700 custom-radius py-3 px-4 text-xs text-white outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Pesan Anda</label>
+          <textarea rows="4" required placeholder="Tuliskan pertanyaan seputar produk di sini..." class="w-full bg-slate-900 border border-slate-700 custom-radius p-4 text-xs text-white outline-none focus:border-indigo-500 resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3.5 custom-radius font-bold text-xs text-white shadow-lg transition hover:opacity-90" style="background-color: var(--button);">
+          Kirim Pesan
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-12 px-6 border-t border-white/10 bg-slate-950 text-slate-400 text-xs text-center">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="font-bold text-white">Sweet Scoop © 2026</div>
+      <div>WhatsApp: <a href="https://wa.me/6281347479530" class="text-emerald-400 font-mono underline">6281347479530</a></div>
+      <div>Platform Dibuat dengan Vimos.ai</div>
+      <button type="button" onclick="openAdminLogin()" class="text-blue-200 hover:text-white underline">Admin Toko</button>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/6281347479530?text=Halo%20Sweet%20Scoop,%20saya%20ingin%20bertanya%20seputar%20produk." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-2xl shadow-emerald-500/50 transition transform hover:scale-110" title="Chat Pembelian via WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Cart Slideover Drawer -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end">
+    <div class="w-full max-w-md bg-slate-900 h-full p-6 flex flex-col justify-between shadow-2xl border-l border-slate-800">
+      <div>
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-cart-shopping text-emerald-400"></i>
+            <h3 class="text-lg font-bold text-white">Keranjang Belanja</h3>
+          </div>
+          <button onclick="toggleCart()" class="text-slate-400 hover:text-white text-lg p-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div id="cartItemsContainer" class="space-y-3 max-h-[55vh] overflow-y-auto">
+          <!-- Dynamically filled -->
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-4 space-y-4">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-slate-400">Total Belanja:</span>
+          <span id="cartTotalPrice" class="font-mono font-bold text-lg text-emerald-400">Rp 0</span>
+        </div>
+
+        <button onclick="checkoutCartViaWa()" class="w-full py-3.5 custom-radius font-bold text-xs text-white bg-emerald-600 hover:bg-emerald-500 transition shadow-xl flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Checkout via WhatsApp (6281347479530)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart & WhatsApp Script -->
+  <script>
+    const waNumber = "6281347479530";
+    const storeName = "Sweet Scoop";
+    let cart = [];
+
+    function buyViaWa(productName, price) {
+      const text = "Halo " + storeName + "! Saya ingin membeli produk:\n\n" +
+        "• Produk: " + productName + "\n" +
+        "• Harga: Rp " + price + "\n\n" +
+        "Format Pemesan:\n" +
+        "Nama:\n" +
+        "Alamat Pengiriman:\n\n" +
+        "Apakah stok produk ini masih tersedia? Terima kasih!";
+      
+      const url = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(text);
+      window.open(url, '_blank');
+    }
+
+    function toggleCart() {
+      const drawer = document.getElementById('cartDrawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function addToCart(name, price, img) {
+      cart.push({ name: name, price: price, img: img });
+      updateCartUI();
+      alert(name + " berhasil dimasukkan ke keranjang belanja!");
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const count = document.getElementById('cartCount');
+      const mCount = document.getElementById('mobileCartCount');
+      if (count) count.textContent = cart.length;
+      if (mCount) mCount.textContent = cart.length;
+
+      const container = document.getElementById('cartItemsContainer');
+      const totalEl = document.getElementById('cartTotalPrice');
+
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-center text-slate-500 py-8 text-xs">Keranjang belanja Anda masih kosong.</p>';
+        if (totalEl) totalEl.textContent = 'Rp 0';
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map((item, idx) => {
+        const numPrice = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+        total += numPrice;
+        return '<div class="flex items-center justify-between p-3 rounded-xl bg-slate-800 border border-slate-700">' +
+          '<div class="flex items-center gap-3">' +
+            '<img src="' + item.img + '" class="w-12 h-12 object-cover rounded-lg">' +
+            '<div>' +
+              '<h4 class="text-xs font-bold text-white">' + item.name + '</h4>' +
+              '<span class="text-[11px] text-emerald-400 font-mono">Rp ' + item.price + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<button onclick="removeFromCart(' + idx + ')" class="text-slate-500 hover:text-rose-400 p-2 text-xs"><i class="fa-solid fa-trash"></i></button>' +
+        '</div>';
+      }).join('');
+
+      if (totalEl) {
+        totalEl.textContent = 'Rp ' + total.toLocaleString('id-ID');
+      }
+    }
+
+    function checkoutCartViaWa() {
+      if (cart.length === 0) {
+        alert('Keranjang belanja Anda kosong!');
+        return;
+      }
+
+      let itemList = cart.map((item, i) => (i + 1) + ". " + item.name + " (Rp " + item.price + ")").join('\n');
+      const total = document.getElementById('cartTotalPrice')?.textContent || '';
+
+      const text = "Halo " + storeName + "! Saya ingin checkout pesanan keranjang saya:\n\n" +
+        itemList + "\n\n" +
+        "Total: " + total + "\n\n" +
+        "Format Pembeli:\n" +
+        "• Nama:\n" +
+        "• Alamat Lengkap:\n" +
+        "• Catatan:\n\n" +
+        "Mohon info rekening dan total ongkos kirim. Terima kasih!";
+
+      const url = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(text);
+      window.open(url, '_blank');
+    }
+
+    const mBtn = document.getElementById('mobileMenuBtn');
+    const mDrawer = document.getElementById('mobileDrawer');
+    if (mBtn && mDrawer) {
+      mBtn.addEventListener('click', () => mDrawer.classList.toggle('hidden'));
+    }
+
+    const cForm = document.getElementById('contactForm');
+    if (cForm) {
+      cForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fields = cForm.querySelectorAll('input, textarea');
+        const nama = fields[0].value.trim();
+        const hp = fields[1].value.trim();
+        const pesan = fields[2].value.trim();
+        const text = `Halo Sweet Scoop!\\nNama: ${nama}\\nNo. HP: ${hp}\\nPesan: ${pesan}`;
+        window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text), '_blank');
+        cForm.reset();
+      });
+    }
+  </script>
+
+  <!-- Admin panel Sweet Scoop -->
+  <div id="adminLoginModal" class="hidden fixed inset-0 z-[80] bg-slate-950/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-5"><div><p class="text-xs font-bold text-blue-600">SWEET SCOOP</p><h2 class="text-xl font-extrabold text-slate-800">Login Admin</h2></div><button onclick="closeAdminLogin()" class="text-slate-500 text-2xl">&times;</button></div>
+      <form id="adminLoginForm" class="space-y-3">
+        <input id="adminEmail" type="email" required placeholder="Email admin" class="w-full rounded-xl border p-3 text-sm text-slate-800">
+        <input id="adminPassword" type="password" required placeholder="Password" class="w-full rounded-xl border p-3 text-sm text-slate-800">
+        <button class="w-full rounded-xl bg-blue-600 p-3 font-bold text-white">Masuk ke Dashboard</button>
+      </form><p id="adminLoginMsg" class="mt-3 text-xs text-rose-600"></p>
+      <p class="mt-3 text-[11px] text-slate-500">Khusus akun admin toko yang sudah dibuat melalui Firebase Authentication.</p>
+    </div>
+  </div>
+  <div id="adminDashboard" class="hidden fixed inset-0 z-[75] overflow-y-auto bg-slate-100">
+    <div class="min-h-screen">
+      <header class="sticky top-0 z-10 bg-slate-900 px-5 py-4 text-white shadow-lg"><div class="mx-auto flex max-w-6xl items-center justify-between"><div><p class="text-xs font-bold tracking-widest text-blue-300">SWEET SCOOP</p><h1 class="text-xl font-extrabold">Admin Dashboard</h1></div><div class="flex gap-2"><button onclick="refreshAdminData()" class="rounded-lg bg-white/10 px-3 py-2 text-xs">Refresh</button><button onclick="adminLogout()" class="rounded-lg bg-rose-500 px-3 py-2 text-xs font-bold">Keluar</button></div></div></header>
+      <main class="mx-auto max-w-6xl space-y-6 p-4 md:p-8">
+        <div class="grid gap-4 sm:grid-cols-3"><div class="rounded-2xl bg-white p-5 shadow-sm"><p class="text-xs text-slate-500">Total Pesanan</p><p id="adminOrderCount" class="mt-2 text-3xl font-black text-slate-800">0</p></div><div class="rounded-2xl bg-white p-5 shadow-sm"><p class="text-xs text-slate-500">Pesanan Baru</p><p id="adminNewCount" class="mt-2 text-3xl font-black text-blue-600">0</p></div><div class="rounded-2xl bg-white p-5 shadow-sm"><p class="text-xs text-slate-500">Produk Tambahan</p><p id="adminProductCount" class="mt-2 text-3xl font-black text-emerald-600">0</p></div></div>
+        <section class="rounded-2xl bg-white p-5 shadow-sm"><div class="mb-4"><h2 class="text-lg font-extrabold text-slate-800">Upload Produk Baru</h2><p class="text-xs text-slate-500">Isi detail produk dan tautan gambar produk.</p></div>
+          <form id="adminProductForm" class="grid gap-3 md:grid-cols-2"><input id="newProductName" required maxlength="70" placeholder="Nama produk" class="rounded-xl border p-3 text-sm text-slate-800"><input id="newProductPrice" required type="number" min="1" placeholder="Harga (contoh: 30000)" class="rounded-xl border p-3 text-sm text-slate-800"><input id="newProductImage" required type="url" placeholder="URL gambar produk (https://...)" class="rounded-xl border p-3 text-sm text-slate-800 md:col-span-2"><textarea id="newProductDesc" maxlength="240" placeholder="Deskripsi produk" class="rounded-xl border p-3 text-sm text-slate-800 md:col-span-2"></textarea><button class="rounded-xl bg-blue-600 p-3 text-sm font-bold text-white md:col-span-2">+ Simpan Produk</button></form><p id="adminProductMsg" class="mt-3 text-xs"></p>
+        </section>
+        <section class="rounded-2xl bg-white p-5 shadow-sm"><div class="mb-4 flex items-center justify-between"><div><h2 class="text-lg font-extrabold text-slate-800">Daftar Pesanan Pelanggan</h2><p class="text-xs text-slate-500">Pesanan yang dikirim melalui checkout website.</p></div></div><div id="adminOrdersList" class="space-y-3"><p class="text-sm text-slate-500">Memuat data pesanan...</p></div></section>
+        <section class="rounded-2xl bg-white p-5 shadow-sm"><h2 class="mb-3 text-lg font-extrabold text-slate-800">Produk yang Diunggah</h2><div id="adminProductsList" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div></section>
+        <p class="pb-6 text-center text-[11px] text-slate-500">Dashboard hanya untuk admin. Pastikan Firebase Realtime Database Rules membatasi akses admin.</p>
+      </main>
+    </div>
+  </div>
+
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getDatabase, ref, push, set, get, update, remove } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBQoRSvcSbwKfJeNHGUo3yQPM1GIZHleAM",
+  authDomain: "sweet-scoop-14e35.firebaseapp.com",
+  databaseURL: "ISI_DATABASE_URL_DARI_FIREBASE_CONSOLE",
+  projectId: "sweet-scoop-14e35",
+  storageBucket: "sweet-scoop-14e35.firebasestorage.app",
+  messagingSenderId: "12669371768",
+  appId: "1:12669371768:web:acc6b08ecec6305238f48d",
+  measurementId: "G-G4DWPNXHJB"
+};
+const ADMIN_EMAIL = 'deouraydahlan103@gmail.com';
+let auth = null, db = null, currentAdmin = null;
+const dbReady = firebaseConfig.databaseURL.startsWith('https://') && !firebaseConfig.databaseURL.includes('ISI_');
+try { const app = initializeApp(firebaseConfig); auth = getAuth(app); if (dbReady) db = getDatabase(app); }
+catch (err) { console.error('Firebase setup:', err); }
+
+window.openAdminLogin = () => { const el=document.getElementById('adminLoginModal'); el.classList.remove('hidden'); el.classList.add('flex'); };
+window.closeAdminLogin = () => { const el=document.getElementById('adminLoginModal'); el.classList.add('hidden'); el.classList.remove('flex'); };
+const msg=(id,text,ok=false)=>{const el=document.getElementById(id); if(el){el.textContent=text;el.className='mt-3 text-xs '+(ok?'text-emerald-600':'text-rose-600');}};
+
+document.getElementById('adminLoginForm').addEventListener('submit', async e=>{
+ e.preventDefault(); if(!auth){msg('adminLoginMsg','Firebase belum siap. Periksa konfigurasi.');return;}
+ try { const cred=await signInWithEmailAndPassword(auth,document.getElementById('adminEmail').value.trim(),document.getElementById('adminPassword').value); if(cred.user.email.toLowerCase()!==ADMIN_EMAIL){await signOut(auth);msg('adminLoginMsg','Akun ini bukan akun admin toko.');return;} }
+ catch(err){msg('adminLoginMsg','Login gagal: '+(err.code||err.message));}
+});
+onAuthStateChanged(auth, user=>{ currentAdmin=user && user.email?.toLowerCase()===ADMIN_EMAIL ? user : null; if(currentAdmin){closeAdminLogin();document.getElementById('adminDashboard').classList.remove('hidden');refreshAdminData();} else {document.getElementById('adminDashboard').classList.add('hidden');} });
+window.adminLogout=async()=>{if(auth) await signOut(auth);};
+window.refreshAdminData=async()=>{ if(!currentAdmin)return; if(!db){document.getElementById('adminOrdersList').innerHTML='<p class="text-sm text-rose-600">Realtime Database belum terhubung. Isi databaseURL pada konfigurasi Firebase di file HTML.</p>';return;} await Promise.all([loadOrders(),loadProducts()]); };
+
+async function loadOrders(){
+ const snap=await get(ref(db,'orders')); const data=snap.exists()?snap.val():{}; const entries=Object.entries(data).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+ document.getElementById('adminOrderCount').textContent=entries.length; document.getElementById('adminNewCount').textContent=entries.filter(([,o])=>(o.status||'Baru')==='Baru').length;
+ const host=document.getElementById('adminOrdersList'); if(!entries.length){host.innerHTML='<p class="text-sm text-slate-500">Belum ada pesanan dari website.</p>';return;}
+ host.innerHTML=entries.map(([id,o])=>`<article class="rounded-xl border border-slate-200 p-4"><div class="flex flex-wrap items-start justify-between gap-2"><div><h3 class="font-bold text-slate-800">${esc(o.customerName||'Pelanggan')}</h3><p class="text-xs text-slate-500">${esc(o.phone||'-')} · ${new Date(o.createdAt||Date.now()).toLocaleString('id-ID')}</p></div><select aria-label="Status pesanan" onchange="changeOrderStatus('${id}',this.value)" class="rounded-lg border p-2 text-xs text-slate-700"><option ${o.status==='Baru'?'selected':''}>Baru</option><option ${o.status==='Diproses'?'selected':''}>Diproses</option><option ${o.status==='Selesai'?'selected':''}>Selesai</option><option ${o.status==='Dibatalkan'?'selected':''}>Dibatalkan</option></select></div><p class="mt-2 whitespace-pre-line text-sm text-slate-700">${esc((o.items||[]).map(x=>`${x.name} × ${x.qty||1} — Rp ${x.price}`).join('\n'))}</p><p class="mt-2 text-sm font-extrabold text-blue-700">Total: Rp ${Number(o.total||0).toLocaleString('id-ID')}</p><p class="mt-1 text-xs text-slate-500">Alamat: ${esc(o.address||'Belum diisi')} · Catatan: ${esc(o.note||'-')}</p></article>`).join('');
+}
+window.changeOrderStatus=async(id,status)=>{if(!currentAdmin||!db)return;await update(ref(db,'orders/'+id),{status});await loadOrders();};
+async function loadProducts(){const snap=await get(ref(db,'products'));const data=snap.exists()?snap.val():{};const entries=Object.entries(data);document.getElementById('adminProductCount').textContent=entries.length;const host=document.getElementById('adminProductsList');host.innerHTML=entries.length?entries.map(([id,p])=>`<div class="flex gap-3 rounded-xl border p-3"><img src="${esc(p.image||'')}" alt="" class="h-16 w-16 rounded-lg object-cover"><div class="min-w-0 flex-1"><p class="truncate text-sm font-bold text-slate-800">${esc(p.name)}</p><p class="text-xs text-blue-700">Rp ${Number(p.price||0).toLocaleString('id-ID')}</p><button onclick="deleteProduct('${id}')" class="mt-1 text-xs text-rose-600 underline">Hapus</button></div></div>`).join(''):'<p class="text-sm text-slate-500">Belum ada produk tambahan.</p>'; renderExtraProducts(data);}
+function renderExtraProducts(data){const grid=document.getElementById('mainProductsGrid');Object.entries(data).forEach(([id,p])=>{if(document.getElementById('extra-'+id))return;const card=document.createElement('div');card.id='extra-'+id;card.className='custom-radius border overflow-hidden shadow-xl flex flex-col bg-white';card.innerHTML=`<div class="aspect-square w-full bg-slate-100"><img src="${esc(p.image)}" alt="${esc(p.name)}" class="h-full w-full object-cover" loading="lazy"></div><div class="flex flex-1 flex-col justify-between space-y-4 p-6"><div><h3 class="mb-1.5 text-lg font-bold">${esc(p.name)}</h3><p class="text-xs">${esc(p.description||'Produk Sweet Scoop')}</p><p class="mt-2 font-bold text-blue-700">Rp ${Number(p.price).toLocaleString('id-ID')}</p></div><button onclick="buyViaWa('${jsq(p.name)}','${Number(p.price).toLocaleString('id-ID')}')" class="rounded-xl bg-emerald-600 py-3 text-xs font-bold text-white">Beli via WhatsApp</button></div>`;grid.appendChild(card);});}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function jsq(v){return String(v??'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+document.getElementById('adminProductForm').addEventListener('submit',async e=>{e.preventDefault();if(!currentAdmin||!db){msg('adminProductMsg','Database belum terhubung atau akses admin belum aktif.');return;}const product={name:document.getElementById('newProductName').value.trim(),price:Number(document.getElementById('newProductPrice').value),image:document.getElementById('newProductImage').value.trim(),description:document.getElementById('newProductDesc').value.trim(),createdAt:Date.now()};try{await set(push(ref(db,'products')),product);e.target.reset();msg('adminProductMsg','Produk berhasil ditambahkan.',true);await loadProducts();}catch(err){msg('adminProductMsg','Gagal menyimpan: '+err.message);}});
+window.deleteProduct=async id=>{if(!currentAdmin||!db||!confirm('Hapus produk ini?'))return;await remove(ref(db,'products/'+id));document.getElementById('extra-'+id)?.remove();await loadProducts();};
+
+// Simpan pesanan sebelum membuka WhatsApp agar pesanan tercatat di dashboard.
+window.checkoutCartViaWa=async()=>{
+ if(!cart || !cart.length){alert('Keranjang belanja Anda kosong!');return;}
+ const customerName=prompt('Nama lengkap pemesan:');if(!customerName?.trim())return;
+ const phone=prompt('Nomor WhatsApp pemesan:');if(!phone?.trim())return;
+ const address=prompt('Alamat pengiriman:');if(!address?.trim())return;
+ const note=prompt('Catatan pesanan (boleh dikosongkan):')||'';
+ const items=cart.map(x=>({name:x.name,price:Number(String(x.price).replace(/[^0-9]/g,''))||0,qty:1}));const total=items.reduce((a,x)=>a+x.price*x.qty,0);
+ const message='Halo Sweet Scoop! Saya ingin memesan:\n'+items.map((x,i)=>`${i+1}. ${x.name} — Rp ${x.price.toLocaleString('id-ID')}`).join('\n')+`\nTotal: Rp ${total.toLocaleString('id-ID')}\nNama: ${customerName}\nNo. WhatsApp: ${phone}\nAlamat: ${address}\nCatatan: ${note}`;
+ try{if(db){await set(push(ref(db,'orders')),{customerName:customerName.trim(),phone:phone.trim(),address:address.trim(),note,items,total,status:'Baru',createdAt:Date.now()});}else{alert('Database belum terhubung. Pesanan akan diteruskan ke WhatsApp, tetapi tidak tersimpan di dashboard admin.');}}catch(err){alert('Pesanan tidak dapat disimpan ke dashboard: '+err.message+'\nWhatsApp tetap akan dibuka.');}
+ window.open('https://wa.me/'+ '6281347479530'+'?text='+encodeURIComponent(message),'_blank');cart=[];updateCartUI();toggleCart();
+};
+</script>
+
+</body>
+</html>
